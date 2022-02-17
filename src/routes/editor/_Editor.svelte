@@ -27,7 +27,10 @@
 
   const onresponse = async (res) => {
     if (res.ok) {
-      goto(res.headers.get('location'));
+      // goto(res.headers.get('location'));
+      const body = await res.json();
+      console.log('onresponse body', body);
+      goto(`/article/${body.article.slug}`);
     }
   };
 
@@ -64,6 +67,7 @@
                 type="text"
                 placeholder="Article Title"
                 bind:value={article.title}
+                name="title"
               />
             </fieldset>
 
@@ -73,6 +77,7 @@
                 type="text"
                 placeholder="What's this article about?"
                 bind:value={article.description}
+                name="description"
               />
             </fieldset>
 
@@ -82,6 +87,7 @@
                 rows="8"
                 placeholder="Write your article (in markdown)"
                 bind:value={article.body}
+                name="body"
               />
             </fieldset>
 
@@ -104,6 +110,7 @@
             </fieldset>
 
             <button
+              type="submit"
               class="btn btn-lg pull-xs-right btn-primary"
               disabled={publishing}
             >
