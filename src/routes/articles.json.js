@@ -33,11 +33,15 @@ export async function get({ url: { searchParams }, locals }) {
 export async function post({ request, locals }) {
   const form = await request.formData();
 
+  const tagList = form.getAll('tagList[]');
+  console.log('tagList', tagList);
+
   const data = {
     article: {
       title: form.get('title'),
       description: form.get('description'),
       body: form.get('body'),
+      tagList,
     },
   };
 

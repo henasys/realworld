@@ -22,7 +22,7 @@
   }
 
   const onsubmit = () => {
-    publishing = true;
+    // publishing = true;
   };
 
   const onresponse = async (res) => {
@@ -101,6 +101,7 @@
 
               <div class="tag-list">
                 {#each article.tagList as tag, i}
+                  <input type="hidden" name="tagList[]" value={tag} />
                   <span class="tag-default tag-pill">
                     <i class="ion-close-round" on:click={() => remove(i)} />
                     {tag}
@@ -110,7 +111,6 @@
             </fieldset>
 
             <button
-              type="submit"
               class="btn btn-lg pull-xs-right btn-primary"
               disabled={publishing}
             >
